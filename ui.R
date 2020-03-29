@@ -1,5 +1,6 @@
 library(shiny)
 library(shinydashboard)
+source("martesa18.R")
 
 # Define UI for application
 ui <- dashboardPage(
@@ -9,18 +10,18 @@ ui <- dashboardPage(
   dashboardSidebar(
     width = 350,
     sidebarMenu(
-      menuItem("Mbrojtja sociale", tabName = "menu_1",
-      menuSubItem("Martesat deri 18 vjeç", tabName = "sub_1"), 
-      menuSubItem("Fëmijët në nivel varfërie relative", tabName = "sub_2"),
-      menuSubItem("Numri i fëmijëve në familje me ndihmë ekonomike", tabName = "sub_2"),
-      menuSubItem("Numri i fëmijëve të shpallur të braktisur", tabName = "sub_1"), 
-      menuSubItem("Numri i fëmijëve të birësuar gjatë vitit", tabName = "sub_2"),
-      menuSubItem("Vdekshmëria foshnjore", tabName = "sub_2"),
-      menuSubItem("Numri i vdekjeve të fëmijëve deri 1 vjeç", tabName = "sub_1"), 
-      menuSubItem("Numri i fëmijëve në nevojë për mbrojtje", tabName = "sub_2"),
-      menuSubItem("Numri i fëmijëve 16-18 vjeç të punësuar me aksidente", tabName = "sub_2"),
-      menuSubItem("Numri i fëmijëve punëmarrës sipas IP", tabName = "sub_2"),
-      menuSubItem("Administrata e Bashkise", tabName = "sub_2")),
+      menuItem("Mbrojtja sociale", tabName = "mb_sociale",
+               menuSubItem("Martesat deri 18 vjeç", tabName = "martesa_18"), 
+               menuSubItem("Fëmijët në nivel varfërie relative", tabName = "sub_2"),
+               menuSubItem("Numri i fëmijëve në familje me ndihmë ekonomike", tabName = "sub_2"),
+               menuSubItem("Numri i fëmijëve të shpallur të braktisur", tabName = "sub_1"), 
+               menuSubItem("Numri i fëmijëve të birësuar gjatë vitit", tabName = "sub_2"),
+               menuSubItem("Vdekshmëria foshnjore", tabName = "sub_2"),
+               menuSubItem("Numri i vdekjeve të fëmijëve deri 1 vjeç", tabName = "sub_1"), 
+               menuSubItem("Numri i fëmijëve në nevojë për mbrojtje", tabName = "sub_2"),
+               menuSubItem("Numri i fëmijëve 16-18 vjeç të punësuar me aksidente", tabName = "sub_2"),
+               menuSubItem("Numri i fëmijëve punëmarrës sipas IP", tabName = "sub_2"),
+               menuSubItem("Administrata e Bashkise", tabName = "sub_2")),
       
       menuItem("Arsimi dhe zhvillim i hershëm", tabName = "menu_2",
                menuSubItem("Numri i fëmijëve 0-3 vjeç në çerdhe", tabName = "sub_1"),
@@ -38,11 +39,11 @@ ui <- dashboardPage(
                menuSubItem("Numri i tentativave për vetëvrasje", tabName = "sub_2"),
                menuSubItem("Numri i fëmijëve viktima të trafikimit", tabName = "sub_1"), 
                menuSubItem("Numri i fëmijëve viktima të mundshme trafikimit", tabName = "sub_2"),
-      menuSubItem("Numri i fëmijëve refugjatë", tabName = "sub_1"),
-      menuSubItem("Numri i fëmijeve që kanë kerkuar azil në Shqipëri", tabName = "sub_1"), 
-      menuSubItem("Numri i fëmijëve me masa mbrojtjeje", tabName = "sub_2"),
-      menuSubItem("Numri i fëmijëve që kanë raportuar dhune", tabName = "sub_2"),
-      menuSubItem("Numri i fëmijëve viktima të dhunës", tabName = "sub_1")),
+               menuSubItem("Numri i fëmijëve refugjatë", tabName = "sub_1"),
+               menuSubItem("Numri i fëmijeve që kanë kerkuar azil në Shqipëri", tabName = "sub_1"), 
+               menuSubItem("Numri i fëmijëve me masa mbrojtjeje", tabName = "sub_2"),
+               menuSubItem("Numri i fëmijëve që kanë raportuar dhune", tabName = "sub_2"),
+               menuSubItem("Numri i fëmijëve viktima të dhunës", tabName = "sub_1")),
       
       
       menuItem("Shëndetesia", tabName = "menu_2",
@@ -80,33 +81,22 @@ ui <- dashboardPage(
                menuSubItem("Numri i fëmijëve viktima të veprave penale të trajtuara në gjykatë",  tabName = "sub_1"),
                menuSubItem("Numri i fëmijëve të trajtuar me urdhër mbrojtje", tabName = "sub_1"), 
                menuSubItem("Numri i fëmijëve me ndihmë ligjore falas",  tabName = "sub_1") )
-    
-      )
+      
     )
+  )
   ,
   
   dashboardBody(
     tabItems(
-      tabItem(tabName = "menu_1", 
-              fluidRow(
-                h1("Homepage 1")
-              )
+      tabItem(tabName = "martesa_18",
+              fixedPage(
+                h2("Martesat deri 18 vjeç sipas:"),
+                linkedScatterUI("scatters"),
+              ))
+              ),
+      tabItem(tabName = "byteam"
       ),
-      tabItem(tabName = "menu_2", 
-              fluidRow(
-                h1("Homepage 2")
-              )
+      tabItem(tabName = "item2"
       ),
-      tabItem(tabName = "sub_1", 
-              fluidRow(
-                h1("Sub Menu Page 1")
-              )
-      ), 
-      tabItem(tabName = "sub_2", 
-              fluidRow(
-                h1("Sub Menu Page 2")
-              )
-      )
-    )
-  )
-)
+      tabItem(tabName = "rawdata"
+      )))
